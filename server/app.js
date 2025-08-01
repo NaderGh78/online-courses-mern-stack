@@ -17,7 +17,12 @@ const app = express();
 
 connectDB();
 
-app.use(cors());
+// middleware
+const corsOptions = {
+    origin: "https://online-courses-mern-stack-1.onrender.com",
+}
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 
