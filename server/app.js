@@ -17,10 +17,14 @@ const app = express();
 
 connectDB();
 
-// middleware
+// middleware 
 const corsOptions = {
-    origin: "https://online-courses-mern-stack-1.onrender.com",
-}
+    origin: [
+        "http://localhost:3000", // local React
+        "https://online-courses-mern-stack-1.onrender.com" // production frontend
+    ],
+    credentials: true
+};
 
 app.use(cors(corsOptions));
 
