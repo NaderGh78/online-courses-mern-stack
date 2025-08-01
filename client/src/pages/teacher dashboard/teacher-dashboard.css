@@ -1,0 +1,46 @@
+ .teacher-dashboard ul li.active {
+     background-color: orange;
+     color: #fff;
+ }
+
+ textarea.my-textarea {
+     font-size: 1.7rem !important;
+     color: var(--black) !important;
+ }
+
+ textarea.my-textarea:focus {
+     background-color: var(--light-bg) !important;
+     box-shadow: none;
+ }
+
+ /* custom table */
+ a.my-table-link {
+     display: inline-block;
+     padding: .5rem 1.7rem;
+     margin: 1rem 0;
+     font-size: 1.6rem;
+     background-color: var(--orange);
+     color: #fff;
+     border-radius: 4px;
+ }
+
+ table.my-table {
+     font-size: 1.5rem;
+
+ }
+
+ table.my-table th,
+ table.my-table td {
+     color: var(--black);
+     background-color: var(--white);
+     vertical-align: middle;
+ }
+
+ table.my-table svg {
+     margin-right: .5rem;
+     font-size: 1.8rem;
+ }
+
+ table.my-table img {
+     width: 70px;
+ }
