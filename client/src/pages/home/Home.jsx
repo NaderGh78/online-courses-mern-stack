@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllPlaylists } from '../../redux/apiCalls/playListApiCall';
 import { OurCourses, Quick } from '../../allPagesPaths';
 import { useTitle } from '../../components/helpers/useTitle';
+import Spinner from '../../components/common/spinner/Spinner';
 
 /*=========================================*/
 /*=========================================*/
@@ -16,7 +17,7 @@ const Home = () => {
 
     const dispatch = useDispatch();
 
-    const { playLists } = useSelector(state => state.playlists);
+    const { playLists, playlistLoading } = useSelector(state => state.playlists);
 
     useEffect(() => {
 
@@ -25,6 +26,8 @@ const Home = () => {
     }, [dispatch]);
 
     /*=========================================*/
+
+    if (playlistLoading) return <Spinner />;
 
     return (
         <div className='home custom-div'>

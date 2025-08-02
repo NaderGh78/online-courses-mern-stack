@@ -100,7 +100,7 @@ const CoursesTable = () => {
     /*=========================================*/
 
     return (
-        <div className="course-table">
+        <div className="course-table" style={{ overflowX: "auto" }}>
             <Link to="/teacher-dashboard/add-course" className="my-table-link">
                 Add new course
             </Link>

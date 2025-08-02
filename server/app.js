@@ -18,6 +18,7 @@ const app = express();
 connectDB();
 
 // middleware 
+// here in case we need to use it localy and in production
 const corsOptions = {
     origin: [
         "http://localhost:3000", // local React

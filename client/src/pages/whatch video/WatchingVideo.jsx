@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getSingleCourseFromPlaylist } from "../../redux/apiCalls/coursesApiCall";
 import { AddComment, AllVideoComments, MainVideo } from "../../allPagesPaths";
-import Spinner from "../../components/common/spinner/Spinner";
 import { useTitle } from "../../components/helpers/useTitle";
 
 /*=========================================*/
@@ -20,7 +19,7 @@ const WatchingVideo = () => {
 
     const { playlistId, courseId } = useParams();
 
-    const { course, courseLoading } = useSelector(state => state.courses);
+    const { course } = useSelector(state => state.courses);
 
     const { allComments } = useSelector(state => state.comment);
 
@@ -45,9 +44,6 @@ const WatchingVideo = () => {
 
     /*=========================================*/
 
-    if (courseLoading) {
-        return <Spinner />;
-    }
     return (
         <div className='watching-video custom-div'>
             <div className="container p-0">

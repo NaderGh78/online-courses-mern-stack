@@ -1,46 +1,66 @@
- .teacher-dashboard ul li.active {
-     background-color: orange;
-     color: #fff;
- }
+  .teacher-dashboard ul {
+      overflow-y: auto;
+  }
 
- textarea.my-textarea {
-     font-size: 1.7rem !important;
-     color: var(--black) !important;
- }
+  .teacher-dashboard ul li a {
+      font-size: 1.5rem;
+      white-space: nowrap;
+  }
 
- textarea.my-textarea:focus {
-     background-color: var(--light-bg) !important;
-     box-shadow: none;
- }
+  .teacher-dashboard ul li.active {
+      background-color: orange;
+      color: #fff;
+  }
 
- /* custom table */
- a.my-table-link {
-     display: inline-block;
-     padding: .5rem 1.7rem;
-     margin: 1rem 0;
-     font-size: 1.6rem;
-     background-color: var(--orange);
-     color: #fff;
-     border-radius: 4px;
- }
+  textarea.my-textarea {
+      font-size: 1.7rem !important;
+      color: var(--black) !important;
+  }
 
- table.my-table {
-     font-size: 1.5rem;
+  textarea.my-textarea:focus {
+      background-color: var(--light-bg) !important;
+      box-shadow: none;
+  }
 
- }
+  /* custom table */
+  a.my-table-link {
+      display: inline-block;
+      padding: .5rem 1.7rem;
+      margin: 1rem 0;
+      font-size: 1.3rem;
+      background-color: var(--orange);
+      color: #fff;
+      border-radius: 4px;
+  }
 
- table.my-table th,
- table.my-table td {
-     color: var(--black);
-     background-color: var(--white);
-     vertical-align: middle;
- }
+  table.my-table {
+      font-size: 1.5rem;
+  }
 
- table.my-table svg {
-     margin-right: .5rem;
-     font-size: 1.8rem;
- }
+  table.my-table th,
+  table.my-table td {
+      color: var(--black);
+      background-color: var(--white);
+      vertical-align: middle;
+  }
 
- table.my-table img {
-     width: 70px;
- }
+  table.my-table svg {
+      margin-right: .5rem;
+      font-size: 1.8rem;
+  }
+
+  table.my-table img {
+      width: 70px;
+  }
+
+  /*====================================*/
+  /*===========Responsive===============*/
+  /*====================================*/
+
+  @media only screen and (max-width:786px) {
+
+      table.my-table th,
+      table.my-table td {
+          white-space: nowrap;
+      }
+  }

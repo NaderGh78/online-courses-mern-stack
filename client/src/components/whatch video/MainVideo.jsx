@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addLikeOnCourse } from "../../redux/apiCalls/coursesApiCall";
 import { FaCalendar, FaHeart } from "react-icons/fa6";
+import Spinner from "../common/spinner/Spinner";
 
 /*=========================================*/
 /*=========================================*/
@@ -19,6 +21,8 @@ const MainVideo = ({ data: {
     const { currentUser } = useSelector(state => state.auth);
 
     const dispatch = useDispatch();
+
+    const [iframeLoaded, setIframeLoaded] = useState(false);
 
     /*=========================================*/
 
@@ -56,15 +60,23 @@ const MainVideo = ({ data: {
     return (
         <div className="main-video">
             {videoLink ? (
-                <iframe
-                    src={`https://www.youtube.com/embed/${videoLink}`}
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                ></iframe>
+                <div>
+                    {!iframeLoaded && (
+                        <div><Spinner /></div>
+                    )}
+                    <iframe
+                        src={`https://www.youtube.com/embed/${videoLink}`}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        onLoad={() => setIframeLoaded(true)}
+                        style={{ visibility: iframeLoaded ? "visible" : "hidden" }}
+                    ></iframe>
+                </div>
             ) : (
                 <p>Video not available.</p>
             )}
+
             <div className="video-info">
                 <h2 style={{ color: "var(--black)" }}>{videoTitle}</h2>
                 <ul>
@@ -72,6 +84,7 @@ const MainVideo = ({ data: {
                     <li><span><FaHeart /></span> {course?.likes?.length || 0} likes</li>
                 </ul>
             </div>
+
             <div className="video-details">
                 <div className="top user-avatar-details my-4">
                     <div className="left">
@@ -88,6 +101,7 @@ const MainVideo = ({ data: {
                         </span>
                     </div>
                 </div>
+
                 <div className="middle">
                     <Link
                         to={`/playlist-details/${playlist}`}
@@ -96,20 +110,17 @@ const MainVideo = ({ data: {
                         onClick={toggleLikeHandler}
                         className={isLiked || likeCourseLoading ? "like-it" : ""}
                     >
-                        {/* <FaHeart />{isLiked ? " Liked" : " Like"} */}
                         <FaHeart />{getSpanText()}
                     </span>
                 </div>
+
                 <p className="mb-0">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque labore ratione,
-                    hic exercitationem mollitia obcaecati culpa dolor placeat provident porro. Lorem,
-                    ipsum dolor sit amet consectetur adipisicing elit. Aliquid iure autem non fugit sint.
-                    A, sequi rerum architecto dolor fugiat illo, iure velit nihil laboriosam cupiditate
-                    voluptatum facere cumque nemo!
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit...
                 </p>
             </div>
         </div>
-    )
+    );
+
 }
 
 export default MainVideo;

@@ -99,7 +99,7 @@ const MainTeacherTable = () => {
     if (isLoading) return <Spinner />;
 
     return (
-        <div className="main-teacher-table">
+        <div className="main-teacher-table" style={{ overflowX: "auto" }}>
             <Link to="/teacher-dashboard/add-playlist" className="my-table-link">
                 Add new playlist
             </Link>

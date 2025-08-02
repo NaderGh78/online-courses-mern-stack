@@ -5,6 +5,7 @@ import { getAllPlaylists } from '../../redux/apiCalls/playListApiCall';
 import { CourseCard } from '../../allPagesPaths';
 import CustomHeading from '../../components/helpers/CustomHeading';
 import { useTitle } from '../../components/helpers/useTitle';
+import Spinner from '../../components/common/spinner/Spinner';
 
 /*=========================================*/
 /*=========================================*/
@@ -17,7 +18,7 @@ const Courses = () => {
 
     const dispatch = useDispatch();
 
-    const { playLists } = useSelector(state => state.playlists);
+    const { playLists, playlistLoading } = useSelector(state => state.playlists);
 
     /*=========================================*/
 
@@ -28,6 +29,8 @@ const Courses = () => {
     }, [dispatch]);
 
     /*=========================================*/
+
+    if (playlistLoading) return <Spinner />;
 
     return (
         <div className='courses custom-div'>
