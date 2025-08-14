@@ -22,6 +22,11 @@ const Teachers = () => {
 
     const [query, setQuery] = useState("");
 
+    const { currentUser } = useSelector(state => state.auth);
+
+    // hide the become a tutor from ui in case the user already login and this user role is [teacher or admin]
+    const hideBecomeTutor = currentUser && (currentUser?.isAdmin || currentUser?.role === "Teacher") ? false : true;
+
     /*=========================================*/
 
     useEffect(() => {
@@ -87,19 +92,27 @@ const Teachers = () => {
                             >
                                 Loading...
                             </h4>
-                            <div className="col-lg-4 col-sm-6">
-                                <div className="teacher-single-card text-center">
-                                    <h3 style={{ color: "var(--black)", fontSize: "2.5rem" }}>Become A Tutor</h3>
-                                    <p style={{ color: "var(--light-color)", fontSize: "1.7rem" }}>
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Eveniet, itaque ipsam fuga ex et aliquam.
-                                    </p>
-                                    <Link
-                                        to={"/register"}
-                                        onClick={hidePopUpHandler}
-                                        className='custom-link'>Get Started</Link>
-                                </div>
-                            </div>
+                            {
+                                hideBecomeTutor ?
+                                    <>
+                                        <div className="col-lg-4 col-sm-6">
+                                            <div className="teacher-single-card text-center">
+                                                <h3 style={{ color: "var(--black)", fontSize: "2.5rem" }}>Become A Tutor</h3>
+                                                <p style={{ color: "var(--light-color)", fontSize: "1.7rem" }}>
+                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                                    Eveniet, itaque ipsam fuga ex et aliquam.
+                                                </p>
+                                                <Link
+                                                    to={"/register"}
+                                                    onClick={hidePopUpHandler}
+                                                    className='custom-link'>Get Started</Link>
+                                            </div>
+                                        </div>
+                                    </>
+                                    :
+                                    null
+                            }
+
                             {teacherSearchResults && teacherSearchResults.length > 0 ? (
                                 teacherSearchResults.map(({ teacher, playlists }) => {
                                     const totalCourses = playlists.reduce((acc, pl) => acc + (pl.courses?.length || 0), 0);

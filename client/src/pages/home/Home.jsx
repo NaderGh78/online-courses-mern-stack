@@ -19,6 +19,13 @@ const Home = () => {
 
     const { playLists, playlistLoading } = useSelector(state => state.playlists);
 
+    const { currentUser } = useSelector(state => state.auth);
+
+    // hide the become a tutor from ui in case the user already login and this user role is [teacher or admin]
+    const hideBecomeTutor = currentUser && (currentUser?.isAdmin || currentUser?.role === "Teacher") ? false : true;
+
+    /*=========================================*/
+
     useEffect(() => {
 
         dispatch(getAllPlaylists());
@@ -32,7 +39,7 @@ const Home = () => {
     return (
         <div className='home custom-div'>
             <div className="container p-0">
-                <Quick />
+                <Quick hideBecomeTutor={hideBecomeTutor} />
                 <OurCourses playLists={playLists} />
             </div>
         </div>

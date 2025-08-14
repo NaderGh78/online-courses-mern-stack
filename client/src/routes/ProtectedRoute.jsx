@@ -18,7 +18,7 @@ const ProtectedRoute = ({ children, requireAuth, adminOnly = false }) => {
     if (!requireAuth && currentUser) return <Navigate to="/" replace />;
 
     // New admin check
-    if (adminOnly && currentUser?.role !== "admin") {
+    if (adminOnly && !currentUser?.isAdmin) {
         return <Navigate to="/" replace />; // Or show "Not Authorized"
     }
 

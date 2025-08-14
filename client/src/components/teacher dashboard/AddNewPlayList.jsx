@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addNewPlaylist } from "../../redux/apiCalls/playListApiCall";
+import { getAllCat } from "../../redux/apiCalls/categoryApiCall";
 import { useTitle } from "../helpers/useTitle";
 import { ToastContainer } from 'react-toastify';
 
@@ -16,6 +17,8 @@ const AddNewPlayList = () => {
     const dispatch = useDispatch();
 
     const { playlistLoading } = useSelector(state => state.playlists);
+
+    const { catArr } = useSelector(state => state.category);
 
     const [title, setTitle] = useState("");
 
@@ -81,6 +84,15 @@ const AddNewPlayList = () => {
 
     /*=========================================*/
 
+    //fetch all categories
+    useEffect(() => {
+
+        dispatch(getAllCat());
+
+    }, []);
+
+    /*=========================================*/
+
     return (
         <div className="add-new-playlist">
             <div className="form-box">
@@ -94,9 +106,12 @@ const AddNewPlayList = () => {
                         onChange={(e) => setCategory(e.target.value)}
                     >
                         <option value="">Select playlist category</option>
-                        <option value="Html">Html</option>
-                        <option value="javaScript">javaScript</option>
-                        <option value="Css">Css</option>
+                        {
+                            catArr.length > 0 ?
+                                catArr.map(el => (<option value={el.title} key={el._id}>{el.title}</option>))
+                                :
+                                <option value="">No categories yet!</option>
+                        }
                     </select>
 
                     <div className="form-group">

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPlaylists, getTeacherPlaylists } from "../../redux/apiCalls/playListApiCall";
 import { addNewCourse } from "../../redux/apiCalls/coursesApiCall";
+import { getAllCat } from "../../redux/apiCalls/categoryApiCall";
 import { useTitle } from "../helpers/useTitle";
 import { ToastContainer, toast } from "react-toastify";
 
@@ -11,19 +12,18 @@ import { ToastContainer, toast } from "react-toastify";
 
 const AddNewCourse = () => {
 
-  // set page title
   useTitle(`New Course`);
 
   const dispatch = useDispatch();
 
-  // redux states
-  const { playLists, teacherPlaylists, playlistLoading } = useSelector((state) => state.playlists);
+  const { teacherPlaylists, playlistLoading } = useSelector(state => state.playlists);
 
-  const { currentUser } = useSelector((state) => state.auth);
+  const { catArr } = useSelector(state => state.category);
 
-  const { courseLoading } = useSelector((state) => state.courses);
+  const { currentUser } = useSelector(state => state.auth);
 
-  // component states
+  const { courseLoading } = useSelector(state => state.courses);
+
   const [videoTitle, setVideoTitle] = useState("");
 
   const [videoLink, setVideoLink] = useState("");
@@ -34,16 +34,20 @@ const AddNewCourse = () => {
 
   const [imagePreview, setImagePreview] = useState(null);
 
-  const [teacherPlaylistId, setTeacherPlaylistId] = useState("");
-
   /*=========================================*/
 
-  // fetch playlists on component mount
+  // Fetch teacher playlists
   useEffect(() => {
 
-    dispatch(getAllPlaylists());
+    if (currentUser?._id) {
 
-  }, [dispatch]);
+      dispatch(getTeacherPlaylists(currentUser?._id));
+
+    }
+
+    dispatch(getAllCat());
+
+  }, [dispatch, currentUser?._id]);
 
   /*=========================================*/
 
@@ -63,23 +67,10 @@ const AddNewCourse = () => {
 
   /*=========================================*/
 
-  useEffect(() => {
-
-    if (currentUser?._id) {
-
-      dispatch(getTeacherPlaylists(currentUser?._id));
-
-    }
-
-  }, [dispatch, currentUser?._id]);
-
-  /*=========================================*/
-
   const addNewCourseHandler = (e) => {
 
     e.preventDefault();
 
-    // validate playlist selection
     if (!playlistId) {
 
       toast.error("No playlist selected! Please choose one.");
@@ -87,6 +78,8 @@ const AddNewCourse = () => {
       return;
 
     }
+
+    const selectedPlaylist = teacherPlaylists.find(p => p._id === playlistId);
 
     const formData = new FormData();
 
@@ -96,7 +89,11 @@ const AddNewCourse = () => {
 
     file && formData.append("tutorialImage", file);
 
-    dispatch(addNewCourse(playlistId, formData)).then((res) => {
+    formData.append("playlistId", selectedPlaylist._id);
+
+    formData.append("playlistCategory", selectedPlaylist.category || "");
+
+    dispatch(addNewCourse(selectedPlaylist._id, formData)).then((res) => {
 
       if (res?.success) {
 
@@ -107,8 +104,6 @@ const AddNewCourse = () => {
         setFile(null);
 
         setImagePreview(null);
-
-        setTeacherPlaylistId("");
 
         setPlaylistId("");
 
@@ -127,44 +122,33 @@ const AddNewCourse = () => {
         <form onSubmit={addNewCourseHandler}>
           {/* Course Title */}
           <div className="form-group">
-            <label htmlFor="course-title">
-              Course Title <span className="text-danger">*</span>
-            </label>
+            <label>Course Title <span className="text-danger">*</span></label>
             <input
               type="text"
               className="form-control"
-              id="course-title"
               value={videoTitle}
               onChange={(e) => setVideoTitle(e.target.value)}
               placeholder="Enter course title"
-
             />
           </div>
 
           {/* Course Video Link */}
           <div className="form-group">
-            <label htmlFor="course-video-link">
-              Course Video Link <span className="text-danger">*</span>
-            </label>
+            <label>Course Video Link <span className="text-danger">*</span></label>
             <input
               type="text"
               className="form-control"
-              id="course-video-link"
               value={videoLink}
               onChange={(e) => setVideoLink(e.target.value)}
               placeholder="Enter video link"
-
             />
           </div>
 
           {/* Playlist Select */}
           <div className="form-group">
-            <label htmlFor="select-playlist">
-              Select Playlist <span className="text-danger">*</span>
-            </label>
+            <label>Select Playlist <span className="text-danger">*</span></label>
             <select
               className="form-select"
-              id="select-playlist"
               value={playlistId}
               onChange={(e) => setPlaylistId(e.target.value)}
             >
@@ -172,9 +156,9 @@ const AddNewCourse = () => {
               {playlistLoading ? (
                 <option>Loading playlists...</option>
               ) : (
-                teacherPlaylists?.length > 0 && teacherPlaylists?.map((playlist) => (
-                  <option key={playlist._id} value={playlist._id}>
-                    {playlist.title}
+                teacherPlaylists?.map(p => (
+                  <option key={p._id} value={p._id}>
+                    {p.title} {p.category ? `(${p.category})` : ""}
                   </option>
                 ))
               )}
@@ -182,52 +166,20 @@ const AddNewCourse = () => {
           </div>
 
           {/* Course Image */}
-          <div className="form-group file-input">
-            <label htmlFor="course-image">
-              Course Image <span className="text-danger">*</span>
-            </label>
+          <div className="form-group">
+            <label>Course Image <span className="text-danger">*</span></label>
             <input
               type="file"
               className="form-control-file"
-              id="course-image"
               onChange={handleFileChange}
               accept="image/*"
-
             />
-            {imagePreview && (
-              <div className="my-4">
-                <img
-                  src={imagePreview}
-                  alt="Course Preview"
-                  className="rounded-lg"
-                  style={{ width: "200px", height: "auto", objectFit: "cover" }}
-                />
-              </div>
-            )}
+            {imagePreview && <img src={imagePreview} alt="Preview" style={{ width: "200px", marginTop: "10px" }} />}
           </div>
 
           {/* Submit Button */}
-          <button
-            type="submit"
-            className="custom-link border-0"
-            style={{ height: "42px" }}
-            disabled={courseLoading}
-          >
-            {courseLoading ? (
-              <div
-                className="spinner-border"
-                style={{
-                  width: "24px",
-                  height: "24px",
-                  borderWidth: "2px",
-                  color: "#fff",
-                }}
-              >
-                <span className="visually-hidden">Loading...</span>
-              </div>
-            ) : (
-              "Add Course"
-            )}
+          <button type="submit" className="custom-link border-0" disabled={courseLoading}>
+            {courseLoading ? "Loading..." : "Add Course"}
           </button>
         </form>
       </div>
@@ -236,4 +188,4 @@ const AddNewCourse = () => {
   );
 };
 
-export default AddNewCourse;  
+export default AddNewCourse;

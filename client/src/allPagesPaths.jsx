@@ -51,6 +51,8 @@ export { default as Admin } from "../src/pages/admin/Admin";
 export { default as TeachersTable } from "../src/components/admin/TeachersTable";
 export { default as StudentsTable } from "../src/components/admin/StudentsTable";
 export { default as OtherTable } from "../src/components/admin/OtherTable";
+export { default as CategoryTable } from "../src/components/admin/CategoryTable";
+export { default as NewCatModal } from "../src/components/admin/NewCatModal";
 
 /*=========================================*/
 
@@ -61,4 +63,4 @@ export { default as AddNewPlayList } from "../src/components/teacher dashboard/A
 export { default as EditPlayList } from "../src/components/teacher dashboard/EditPlayList";
 export { default as CoursesTable } from "../src/components/teacher dashboard/CoursesTable";
 export { default as AddNewCourse } from "../src/components/teacher dashboard/AddNewCourse";
-export { default as EditCourse } from "../src/components/teacher dashboard/EditCourse"; 
+export { default as EditCourse } from "../src/components/teacher dashboard/EditCourse";   

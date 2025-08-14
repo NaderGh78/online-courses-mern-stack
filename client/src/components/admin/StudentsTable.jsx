@@ -4,7 +4,9 @@
 
 const StudentsTable = () => {
     return (
-        <div>StudentsTable</div>
+        <div className='students custom-div'>
+            StudentsTable
+        </div>
     )
 }
 

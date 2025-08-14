@@ -14,7 +14,7 @@ const Admin = () => {
     return (
         <div className="admin custom-div">
             <div className="container p-0">
-                <ul className="d-flex gap-5">
+                <ul className="d-flex gap-5" style={{ overflowX: "auto" }}>
                     <li>
                         <Link
                             to={"/admin"}
@@ -30,6 +30,11 @@ const Admin = () => {
                         <Link
                             to={"/admin/other"}
                             className={`${pathname === "/admin/other" ? "active" : ""}`}>Other</Link>
+                    </li>
+                    <li>
+                        <Link
+                            to={"/admin/category"}
+                            className={`${pathname === "/admin/category" ? "active" : ""}`}>Category</Link>
                     </li>
                 </ul>
                 <Outlet />

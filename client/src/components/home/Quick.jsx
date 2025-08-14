@@ -6,7 +6,8 @@ import CustomHeading from "../helpers/CustomHeading";
 /*=========================================*/
 /*=========================================*/
 
-const Quick = () => {
+const Quick = ({ hideBecomeTutor }) => {
+
     return (
         <>
             <CustomHeading text="quick options" />
@@ -45,7 +46,7 @@ const Quick = () => {
                     </div>
                     <div className="col-lg-4 col-md-6">
                         <div className='box'>
-                            <h5>top categories</h5>
+                            <h5>popular topics</h5>
                             <ul className='others'>
                                 {
                                     homePopularData?.map(li => (
@@ -55,16 +56,24 @@ const Quick = () => {
                             </ul>
                         </div>
                     </div>
-                    <div className="col-lg-4 col-md-6">
-                        <div className='box'>
-                            <h5>become a tutor</h5>
-                            <p style={{ color: "var(--light-color)", fontSize: "1.8rem" }}>
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                                Perspiciatis, nam?
-                            </p>
-                            <Link to={"/about"} className='main-custom-link'>Get Started</Link>
-                        </div>
-                    </div>
+                    {
+                        // hide the become a tutor from ui in case the user already login and this user role is [teacher or admin]
+                        hideBecomeTutor ?
+                            <>
+                                <div className="col-lg-4 col-md-6">
+                                    <div className='box'>
+                                        <h5>become a tutor</h5>
+                                        <p style={{ color: "var(--light-color)", fontSize: "1.8rem" }}>
+                                            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                                            Perspiciatis, nam?
+                                        </p>
+                                        <Link to={"/teachers"} className='main-custom-link'>Get Started</Link>
+                                    </div>
+                                </div>
+                            </>
+                            :
+                            null
+                    }
                 </div>
             </div>
         </>

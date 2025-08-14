@@ -8,6 +8,7 @@ const UsersPath = require("./routes/usersRoute");
 const PlaylistPath = require("./routes/PlaylistRoute");
 const CoursePath = require("./routes/coursesRoute");
 const CommentPath = require("./routes/commentRoute");
+const CategoriesPath = require("./routes/categoriesRoute");
 
 /*=========================================*/
 /*=========================================*/
@@ -39,6 +40,7 @@ app.use("/api/users", UsersPath);
 app.use("/api/playlists", PlaylistPath);
 app.use("/api/courses", CoursePath);
 app.use("/api/comments", CommentPath);
+app.use("/api/categories", CategoriesPath);
 
 /*=========================================*/
 

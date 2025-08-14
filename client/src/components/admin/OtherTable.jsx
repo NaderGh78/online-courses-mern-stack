@@ -4,7 +4,9 @@
 
 const OtherTable = () => {
     return (
-        <div>OtherTable</div>
+        <div className='other custom-div'>
+            OtherTable
+        </div>
     )
 }
 

@@ -7,6 +7,7 @@ import { profileReducer } from "./slices/profileSlice";
 import { playListtReducer } from "./slices/playlistSlice";
 import { coursesReducer } from "./slices/courseSlice";
 import { commentReducer } from "./slices/commentSlice";
+import { categoryReducer } from "./slices/categorySlice";
 
 /*=========================================*/
 /*=========================================*/
@@ -22,6 +23,7 @@ const store = configureStore({
         playlists: playListtReducer,
         courses: coursesReducer,
         comment: commentReducer,
+        category: categoryReducer,
     }
 });
 

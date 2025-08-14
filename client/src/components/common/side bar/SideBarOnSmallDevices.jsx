@@ -29,6 +29,8 @@ const SideBarOnSmallDevices = ({ sideBarToggle }) => {
 
     const navigate = useNavigate();
 
+    const isAdmin = currentUser?.isAdmin ? true : false;
+
     /*=========================================*/
 
     const linkData = [
@@ -101,6 +103,8 @@ const SideBarOnSmallDevices = ({ sideBarToggle }) => {
         });
     }
 
+
+
     /*=========================================*/
 
     return (
@@ -137,12 +141,12 @@ const SideBarOnSmallDevices = ({ sideBarToggle }) => {
                                 }
                             </span>
                             {
-                                currentUser?.role === "Teacher" ?
+                                currentUser?.role === "Teacher" || currentUser?.isAdmin ?
                                     <>
                                         <Link
-                                            to={"/teacher-dashboard"}
+                                            to={isAdmin ? "/admin" : "/teacher-dashboard"}
                                             onClick={hidePopUpHandler}
-                                            className='custom-link'>Dashboard</Link>
+                                            className='custom-link'>{isAdmin ? "Admin Dashboard" : "Dashboard"}</Link>
                                     </>
                                     :
                                     <>

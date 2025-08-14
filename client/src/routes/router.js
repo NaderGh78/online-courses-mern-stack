@@ -4,6 +4,7 @@ import {
     AddNewCourse,
     AddNewPlayList,
     Admin,
+    CategoryTable,
     ContactUs,
     Courses,
     CourseSearch,
@@ -153,6 +154,14 @@ export const router = createHashRouter([
                         element: (
                             <ProtectedRoute requireAuth={true}>
                                 <OtherTable />
+                            </ProtectedRoute>
+                        )
+                    },
+                    {
+                        path: "category",
+                        element: (
+                            <ProtectedRoute requireAuth={true}>
+                                <CategoryTable />
                             </ProtectedRoute>
                         )
                     }
