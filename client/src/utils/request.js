@@ -4,12 +4,11 @@ import axios from "axios";
 /*===========================================*/
 /*===========================================*/
 
-// const localy = "http://localhost:3001";
+const baseURL =
+    window.location.origin.includes("localhost")
+        ? "http://localhost:3001"
+        : window.location.origin;
 
-// const production = "https://online-courses-mern-stack.onrender.com";
+const request = axios.create({ baseURL });
 
-const request = axios.create({
-    baseURL: process.env.REACT_APP_BASE_URL || "http://localhost:3001"
-});
-
-export default request; 
+export default request;
