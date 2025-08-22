@@ -44,9 +44,12 @@ const createPlaylistCtrl = asyncHandler(
 
         }
 
-        // Set default playlist image
+        const DEFAULT_IMAGE = `${process.env.BACKEND_URL || "http://localhost:3001"}/uploads/no-picture.jpg`;
+
+        // Set default playlist image 
         let playlistImage = {
-            url: `${process.env.BACKEND_URL}/uploads/no-picture.jpg`,
+            // url: `${process.env.BACKEND_URL}/uploads/no-picture.jpg`,
+            url: DEFAULT_IMAGE,
             publicId: null
         };
 

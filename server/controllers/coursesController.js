@@ -81,10 +81,13 @@ const createCourseCtrl = asyncHandler(
 
     }
 
+    const DEFAULT_IMAGE = `${process.env.BACKEND_URL || "http://localhost:3001"}/uploads/no-picture.jpg`;
+
     // 6. Handle image upload (Cloudinary)
     let tutorialImage = {
       // url: `${process.env.BACKEND_URL}/uploads/no-picture.jpg`,
-      url: "https://online-courses-mern-stack.onrender.com/uploads/no-picture.jpg",
+      //url: "https://online-courses-mern-stack.onrender.com/uploads/no-picture.jpg",
+      url: DEFAULT_IMAGE,
       publicId: null
     };
 
@@ -472,4 +475,4 @@ module.exports = {
   addLikeOnCourseCtrl,
   approveCourseByAdminCtrl
 
-}; 
+};  
