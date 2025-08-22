@@ -44,14 +44,21 @@ const createPlaylistCtrl = asyncHandler(
 
         }
 
-        const DEFAULT_IMAGE = `${process.env.BACKEND_URL || "http://localhost:3001"}/uploads/no-picture.jpg`;
+        const DEFAULT_IMAGE = process.env.BACKEND_URL
+            ? `${process.env.BACKEND_URL}/uploads/no-picture.jpg`
+            : "http://localhost:3001/uploads/no-picture.jpg"; 
 
         // Set default playlist image 
-        let playlistImage = {
-            // url: `${process.env.BACKEND_URL}/uploads/no-picture.jpg`,
+        // let playlistImage = {
+        //     // url: `${process.env.BACKEND_URL}/uploads/no-picture.jpg`,
+        //     url: DEFAULT_IMAGE,
+        //     publicId: null
+        // };
+
+        let playlistImage = req.body.playlistImage || {
             url: DEFAULT_IMAGE,
             publicId: null
-        };
+        }; 
 
         // If an image was uploaded, upload it to Cloudinary
         if (req.file) {
