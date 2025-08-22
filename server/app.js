@@ -27,7 +27,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 const corsOptions = {
     origin: [
         "http://localhost:3000", // local React
-        //"https://online-courses-mern-stack-1.onrender.com" // production frontend
+        "https://online-courses-mern-stack-1.onrender.com" // production frontend
     ],
     credentials: true
 };
