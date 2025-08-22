@@ -179,16 +179,9 @@ const CoursesTable = () => {
 
                                             <td>{course.videoTitle}</td>
                                             <td>{course.videoLink}</td>
-                                            {/* <td>
-                                                <img
-                                                    src={course.tutorialImage?.url || `${process.env.REACT_APP_BASE_URL}/uploads/no-picture.jpg`}
-                                                    alt="cover"
-                                                    width={50}
-                                                />
-                                            </td> */}
                                             <td>
                                                 <img
-                                                    src={course.tutorialImage?.url || `${window.location.origin}/uploads/no-picture.jpg`}
+                                                    src={course.tutorialImage?.url || `${process.env.REACT_APP_BASE_URL}/uploads/no-picture.jpg`}
                                                     alt="cover"
                                                     width={50}
                                                 />

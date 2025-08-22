@@ -138,17 +138,10 @@ const MainTeacherTable = () => {
                                                 : el.description}
                                         </td>
                                         <td>{el.category}</td>
-                                        {/* <td>
+                                        <td>
                                             <img
                                                 // src={el.mainPlaylistImage?.url} 
                                                 src={el.mainPlaylistImage?.url || `${process.env.REACT_APP_BASE_URL}/uploads/no-picture.jpg`}
-                                                alt="cover"
-                                                width={50}
-                                            />
-                                        </td> */}
-                                        <td>
-                                            <img
-                                                src={el.mainPlaylistImage?.url || `${window.location.origin}/uploads/no-picture.jpg`}
                                                 alt="cover"
                                                 width={50}
                                             />
