@@ -119,10 +119,9 @@ const CourseView = () => {
                     <div className="col-lg-4 col-md-6 col-12 px-3">
                         <h4>User details</h4>
                         <ul>
-                            <li>Created by: <span>hello teacher</span></li>
-                            <li>Email: <span style={{ textTransform: "none" }}>hello email</span></li>
-                            <li>Join at: <span>hello date</span></li>
-                            <li>Playlists count: <span>hello length</span></li>
+                            <li>Created by : <span>{course?.teacher?.username}</span></li>
+                            <li>Course id : <span>{course?._id}</span></li>
+                            <li>Course in playlist : <span style={{ textTransform: "none" }}>{course?.playlist?.title}</span></li>
                         </ul>
                     </div>
 

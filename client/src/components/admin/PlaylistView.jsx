@@ -115,15 +115,16 @@ const PlaylistView = () => {
                         </div>
                     </div>
 
-
                     {/* User details */}
                     <div className="col-lg-4 col-md-6 col-12 px-3">
                         <h4>User details</h4>
                         <ul>
-                            <li>Created by: <span>{singlePlayList?.teacher?.username}</span></li>
-                            <li>Email: <span style={{ textTransform: "none" }}>{singlePlayList?.teacher?.email}</span></li>
-                            <li>Join at: <span>{singlePlayList?.teacher?.createdAt.slice(0, 10)}</span></li>
-                            <li>Playlists count: <span>{singlePlayList?.teacher?.createdPlaylists.length || 0}</span></li>
+                            <li>Playlists id: <span>{singlePlayList?.teacher?._id}</span></li>
+                            <li>Courses in this playlist : <span>{singlePlayList?.courses?.length || 0}</span></li>
+                            <li>Created by : <span>{singlePlayList?.teacher?.username}</span></li>
+                            <li>Email : <span style={{ textTransform: "none" }}>{singlePlayList?.teacher?.email}</span></li>
+                            <li>Join at : <span>{singlePlayList?.teacher?.createdAt.slice(0, 10)}</span></li>
+                            <li>All user playlists counts : <span>{singlePlayList?.teacher?.createdPlaylists.length || 0}</span></li>
                         </ul>
                     </div>
 

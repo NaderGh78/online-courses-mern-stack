@@ -37,6 +37,7 @@ const AdminPlaylistsTable = () => {
                     <tr>
                         <th className="text-center" scope="col">Id</th>
                         <th className="text-center" scope="col">Playlist Name</th>
+                        <th className="text-center" scope="col">Category</th>
                         <th className="text-center" scope="col">Created By</th>
                         <th className="text-center" scope="col">Image</th>
                         <th className="text-center" scope="col">Approved</th>
@@ -48,10 +49,11 @@ const AdminPlaylistsTable = () => {
                     {
                         playLists?.length > 0
                             ?
-                            playLists?.map(el => (
+                            playLists?.map((el, index) => (
                                 <tr className="text-center" key={el._id}>
-                                    <td>{el._id}</td>
+                                    <td>{index + 1}</td>
                                     <td>{el.title}</td>
+                                    <td>{el.category}</td>
                                     <td>{el.teacher?.username}</td>
                                     <td>
                                         <img
@@ -83,7 +85,7 @@ const AdminPlaylistsTable = () => {
                                 </tr>
                             )) :
                             <tr>
-                                <td colSpan={7} className="text-center">No playlists yet!</td>
+                                <td colSpan={8} className="text-center">No playlists yet!</td>
                             </tr>
                     }
                 </tbody>

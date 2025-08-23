@@ -44,9 +44,9 @@ const AdminCoursesTable = () => {
         <tbody>
           {playLists && playLists.length > 0 ? (
             playLists.map(playlist =>
-              playlist.courses.map(course => (
+              playlist.courses.map((course, index) => (
                 <tr className="text-center" key={course._id}>
-                  <td>{course._id}</td>
+                  <td>{index + 1}</td>
                   <td>{course.videoTitle}</td>
                   <td>
                     <img

@@ -39,10 +39,13 @@ const TeacherProfile = () => {
 
     /*=========================================*/
 
-    // filter by approved playlists
+    // get the approved playlists for specific teacher id
     const approvedPlaylists = playLists?.length > 0
         ? playLists
-            .filter(p => p.isPlaylistApproved === "approved")
+            .filter(p =>
+                p.isPlaylistApproved === "approved" &&
+                p.teacher?._id === id
+            )
             .map(p => ({
                 ...p,
                 coursesCount: (p.courses || []).filter(c => c.isCourseApproved === "approved").length

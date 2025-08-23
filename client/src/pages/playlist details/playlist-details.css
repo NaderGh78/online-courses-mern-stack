@@ -108,3 +108,14 @@
     border: 2px dotted var(--main-color);
     border-radius: 25px;
 }
+
+/*====================================*/
+/*===========Responsive===============*/
+/*====================================*/
+
+@media only screen and (max-width:576px) {
+
+    .playlist-details .playlist-details-box .thumb-box {
+        height: 22rem;
+    }
+}

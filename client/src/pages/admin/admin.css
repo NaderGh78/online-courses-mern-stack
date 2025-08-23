@@ -29,6 +29,10 @@
     margin-bottom: 8rem;
 }
 
+.admin .view-details .row>div {
+    margin-bottom: 1.2rem;
+}
+
 .admin .view-details .playlist-view-box {
     display: flex;
     justify-content: space-between;
@@ -62,6 +66,7 @@
     color: var(--light-color);
     border: 1px solid var(--main-color);
     border-radius: 25px;
+    white-space: nowrap;
 }
 
 .admin .view-details ul {
@@ -93,4 +98,16 @@
 .admin .view-details a {
     font-size: 1.3rem;
     color: var(--orange);
+}
+
+/*====================================*/
+/*===========Responsive===============*/
+/*====================================*/
+
+@media only screen and (max-width:576px) {
+
+    .admin .view-details .row>div:nth-of-type(2) {
+        padding: 0 !important;
+    }
+
 }
